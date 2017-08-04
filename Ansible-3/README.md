@@ -2,6 +2,7 @@
 
 1. Create folder ~/cm/ansible/day-3. All working files are supposed to be placed right there.
 2. Develop custom filter to select an url to download mongodb depends on OS name and S/W version from https://www.mongodb.org/dl/linux/
+
 __Requirements:__
 
 * Write a playbook (name: mongodb.yml) to prove that this module works
@@ -32,10 +33,12 @@ class FilterModule(object):
 ```
 
 3. Develop custom module to manage VirtualBox:
+
 __Arguments:__
 
 * path to vagrantfile
 * state: started, stopped, destroyed
+
 __Return values:__
 
 * state: running, stopped, not created
@@ -44,6 +47,7 @@ __Return values:__
 * username to connect to VM
 * os_name
 * RAM size
+
 __Errors:__
 
 * file doesn’t exists
@@ -162,6 +166,7 @@ EOF
 ```
 
 4. Create a playbook (name: stack.yml) to provision Tomcat stack (nginx + tomcat) on VirtualBox VM
+
 __Requirements:__
 
 * 2 Plays: provision VM, roll out Tomcat stack (using roles from previous lab work)
