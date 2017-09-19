@@ -25,7 +25,7 @@ $ mvn clean package -DbuildNumber=$VERSION
 * Example:
 * - deploy: url=... war=… username=… password=…
 
-```
+```bash
 #!/bin/bash
 
 source $1
