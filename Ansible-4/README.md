@@ -70,7 +70,7 @@ __Requirements:__
   * - Deployment time
   * - Deploy User
 
-```
+```yaml
 - name: Update info-file
   shell: 'echo -e "Deployment time= $(date)\nDeployment user = $(whoami)" > deploy-info.txt'
 
@@ -81,14 +81,14 @@ __Requirements:__
 5. Develop a playbook (name: deploy.yml) to deploy war file (role!), pass war-file as an extra-argument to playbook.
 
 __Example:__
-```
+```bash
 $ ansible-playbook deploy.yml … -e war=…
 ```
 
 ***Consider: Playbook should deploy war file and test that deployment was successful.***
 
 * roles/deploy/tasks/main.yml
-```
+```yaml
 # tasks file for roles/deploy
 - name: Persist VM-state is Started
   vagrant_check: 
@@ -120,7 +120,7 @@ $ ansible-playbook deploy.yml … -e war=…
 ```
 
 * deploy.yml
-```
+```yaml
 - name: "Deploy War to Tomcat"
   hosts: localhost
   roles:
