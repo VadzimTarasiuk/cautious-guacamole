@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 #DEFAULTS
 FILES_SOURCE=`pwd`;
 FILES_DEST=`pwd`;
@@ -39,43 +40,60 @@ do
   esac
 done
 
+#PRE-CHECKS
+if [[ ! -d $FILES_DEST ]]; then
+  if [[ $VB == 1 ]]; then
+    echo "==>  Folder doesn't exist, creating..."
+    mkdir -p -v $FILES_DEST;
+  else
+    mkdir -p $FILES_DEST;
+  fi
+else
+  if [[ $VB == 1 ]]; then
+    echo "==>  Folder exists, moving on..."
+  fi
+fi
 
 #THE MAIN CODE
 torrents_arr=();
-if [[ $VB == 1 ]]; then echo "List of files found in path $FILES_SOURCE :"; fi
+if [[ $VB == 1 ]]; then echo "==>  List of files found in path $FILES_SOURCE :"; fi
 for file in "$FILES_SOURCE"/*; do
   if [[ -f $file ]]; then
     new_item=`basename "$file" "$EXT"`;
     torrents_arr=("${torrents_arr[@]}" "$new_item");
     if [[ $VB == 1 ]]; then
-      echo "    $new_item"
+      echo "====>  `basename "$file"`"
     fi
   fi
 done
+if [[ $VB == 1 ]]; then echo ""; fi
 
 folders_arr=();
-if [[ $VB == 1 ]]; then echo "List of folders found in path $DATA_PATH :"; fi 
+if [[ $VB == 1 ]]; then echo "==>  List of folders found in path $DATA_PATH :"; fi 
 for dir in $DATA_PATH/*; do
   if [[ -d $dir ]]; then
     new_item=`basename "$dir"`;
     folders_arr=("${folders_arr[@]}" "$new_item");
     if [[ $VB == 1 ]]; then
-      echo "    $new_item"
+      echo "====>  $new_item"
     fi
   fi
 done
+if [[ $VB == 1 ]]; then echo ""; fi
 
 counter=0; i=0; j=0;
+if [[ $VB == 1 ]]; then echo "==> Adding matching files to $DATA_PATH :"; fi
 for i in "${torrents_arr[@]}"; do
   for j in "${folders_arr[@]}"; do
     if [[ "$i" == "$j" ]]; then
       new_item="$FILES_SOURCE"/"$i""$EXT";
       counter=$((counter+1));
-      cp "$FILES_SOURCE"/"$i""$EXT" "$FILES_DEST"
       if [[ $VB == 1 ]]; then
-        echo "File $new_item copied to $FILES_DEST"
+        cp -f  "$new_item" "$FILES_DEST"
+        echo "==>  Copied: $i$EXT --> $FILES_DEST"
       fi
     fi
   done
 done
+if [[ $VB == 1 ]]; then echo ""; fi
 echo "==== $counter objects were processed. ===="
