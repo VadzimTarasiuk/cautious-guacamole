@@ -1,9 +1,5 @@
 #!/bin/bash
 
-#TO-DO:
-#Create an interface and usage.
-#Basically: Torrent-files source, torrent-files destination, usage | also verbose... maybe
-
 #DEFAULTS
 FILES_SOURCE=`pwd`;
 FILES_DEST=`pwd`;
