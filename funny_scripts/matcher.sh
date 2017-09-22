@@ -69,13 +69,20 @@ done
 if [[ $VB == 1 ]]; then echo ""; fi
 
 folders_arr=();
-if [[ $VB == 1 ]]; then echo "==>  List of folders found in path $DATA_PATH :"; fi 
-for dir in $DATA_PATH/*; do
-  if [[ -d $dir ]]; then
+if [[ $VB == 1 ]]; then echo "==>  List of potential data targets found in path $DATA_PATH :"; fi 
+for dir in "$DATA_PATH"/*; do
+  if [[ -d $dir ]]; then     
     new_item=`basename "$dir"`;
     folders_arr=("${folders_arr[@]}" "$new_item");
     if [[ $VB == 1 ]]; then
       echo "====>  $new_item"
+    fi
+  else
+    fname=`basename "$dir" `;
+    new_item="${fname%.*}";
+    folders_arr=("${folders_arr[@]}" "$new_item");
+    if [[ $VB == 1 ]]; then
+      echo "====>  $fname"
     fi
   fi
 done
@@ -90,7 +97,7 @@ for i in "${torrents_arr[@]}"; do
       counter=$((counter+1));
       if [[ $VB == 1 ]]; then
         cp -f  "$new_item" "$FILES_DEST"
-        echo "==>  Copied: $i$EXT --> $FILES_DEST"
+        echo "====>  Copied: $i$EXT --> $FILES_DEST"
       fi
     fi
   done
