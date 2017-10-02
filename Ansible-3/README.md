@@ -9,7 +9,7 @@ __Requirements:__
 * At least 9 versions of MongoDB for 3 different Linux distributives (list with links)
 * Filter should process a list of urls and takes 3 options: os_family (discovered by ansible, variable, produced by setup module), os release number and mongodb_version (set in play vars)
 
-```
+```python
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
@@ -53,7 +53,7 @@ __Errors:__
 * failed on creation
 * etc
 
-```
+```bash
 #!/bin/bash
 
 #Traceback it, when called without params
@@ -171,7 +171,7 @@ __Requirements:__
 * 2 Plays: provision VM, roll out Tomcat stack (using roles from previous lab work)
 * 2nd play should work with dynamically composed Inventory (connection settings to VM), http://docs.ansible.com/ansible/add_host_module.html
 
-```
+```yaml
 - name: "Play1: Dynamically Compose Inventory"
   hosts: localhost
 
